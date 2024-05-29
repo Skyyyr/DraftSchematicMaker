@@ -632,11 +632,11 @@ function formatResourceTableData() {
 
     const formattedData = `
     ingredientTemplateNames = {${ingredientTemplateNames.map(name => `"${name}"`).join(', ')}},
-    \tingredientTitleNames = {${ingredientTitleNames.map(name => `"${name}"`).join(', ')}},
-    \tingredientSlotType = {${ingredientSlotTypes.join(', ')}},
-    \tresourceTypes = {${resourceTypes.map(type => `"${type}"`).join(', ')}},
-    \tresourceQuantities = {${resourceQuantities.join(', ')}},
-    \tcontribution = {${contributions.join(', ')}},
+    ingredientTitleNames = {${ingredientTitleNames.map(name => `"${name}"`).join(', ')}},
+    ingredientSlotType = {${ingredientSlotTypes.join(', ')}},
+    resourceTypes = {${resourceTypes.map(type => `"${type}"`).join(', ')}},
+    resourceQuantities = {${resourceQuantities.join(', ')}},
+    contribution = {${contributions.join(', ')}},
     `.trim();
 
     return formattedData;
