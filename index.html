@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schematic Generator</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    
+    <!-- Table for schematic attributes -->
+    <div class="container text-center">
+        <h1>Schematic Generator</h1>
+        <div class="mb-3">
+            <label for="customName" class="form-label">Custom Object Name</label>
+            <input type="text" class="form-control" id="customName" placeholder="Rocket Launcher">
+        </div>
+        <div>
+            <label>Tool Required</label>
+            <br>
+            <div class="btn-group">
+                <button id="toolTypes" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Tool Type
+                </button>
+                <ul id="toolTypesMenu" class="dropdown-menu scrollableDropdown">
+                </ul>
+                <br>
+                <input id="selectedToolTypes" type="text" class="form-control" placeholder="Selected Tool Type" readonly>
+            </div>
+
+            <br>
+
+            <label>Complexity</label>
+            <br>
+            <input id="complexity" type="number" placeholder="20">
+
+            <br>
+
+            <label>Factory Crate Type</label>
+            <br>
+            <div class="btn-group">
+                <button id="factoryTypes" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Factory Crate Type
+                </button>
+                <ul id="factoryTypesMenu" class="dropdown-menu scrollableDropdown">
+                </ul>
+                <br>
+                <input id="selectedFactoryTypes" type="text" class="form-control" placeholder="Selected Factory Type" readonly>
+            </div>
+            <br>
+            <label>Factory Crate Size</label>
+            <br>
+            <input id="factoryCrateSize" type="number" placeholder="0" value="0">
+        </div>
+        
+        <br>
+
+        <label>Experience Type</label>
+        <br>
+        <div class="btn-group">
+            <button id="xpTypes" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Experience Type
+            </button>
+            <ul id="xpTypesMenu" class="dropdown-menu scrollableDropdown">
+            </ul>
+            <br>
+            <input id="selectedXpTypes" type="text" class="form-control" placeholder="Selected Experience Type" readonly>
+        </div>
+
+        <br>
+
+        <label>Experience Amount</label>
+        <br>
+        <input id="xpAmount" type="number" placeholder="20">
+
+        <br>
+
+        <label>Assembly / Experimentation / Customization Type</label>
+        <br>
+        <div class="btn-group">
+            <button id="assemblyTypes" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Assembly Type
+            </button>
+            <ul id="assemblyTypesMenu" class="dropdown-menu scrollableDropdown">
+            </ul>
+            <br>
+            <input id="selectedAssemblyTypes" type="text" class="form-control" placeholder="Selected Assembly Type" readonly>
+        </div>
+        <div class="btn-group">
+            <button id="experimentationTypes" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Experimentation Type
+            </button>
+            <ul id="experimentationTypesMenu" class="dropdown-menu scrollableDropdown">
+            </ul>
+            <br>
+            <input id="selectedExperimentationTypes" type="text" class="form-control" placeholder="Selected Experimentation Type" readonly>
+        </div>
+        <div class="btn-group">
+            <button id="customizationTypes" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Customization Type
+            </button>
+            <ul id="customizationTypesMenu" class="dropdown-menu scrollableDropdown">
+            </ul>
+            <br>
+            <input id="selectedCustomizationTypes" type="text" class="form-control" placeholder="Selected Customization Type" readonly>
+        </div>
+    
+        <br>
+        <h2>Resources Table</h2>
+        
+        <div class="form-group">
+            <label for="resourceInput">Resource:</label>
+            <input type="text" class="form-control" id="resourceInput" placeholder="Enter resource">
+            <div class="col">
+                <div id="autocomplete-list" class="autocomplete-items"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="valueInput">Value:</label>
+            <input type="text" class="form-control" id="valueInput" placeholder="Enter value">
+        </div>
+        <div class="btn-group">
+            <button id="ingredientTemplateTypes" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Ingredient Template Type
+            </button>
+            <ul id="ingredientTemplateTypesMenu" class="dropdown-menu scrollableDropdown">
+            </ul>
+            <br>
+            <input id="selectedIngredientTemplateTypes" type="text" class="form-control" placeholder="Selected Template Type" readonly>
+        </div>
+        <div class="btn-group">
+            <button id="ingredientTypes" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Ingredient Type
+            </button>
+            <ul id="ingredientTypesMenu" class="dropdown-menu scrollableDropdown">
+            </ul>
+            <br>
+            <input id="selectedIngredientTypes" type="text" class="form-control" placeholder="Selected Ingredient Type" readonly>
+        </div>
+        <div class="btn-group">
+            <button id="slotTypes" type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Resource Slot Type
+            </button>
+            <ul id="slotTypesMenu" class="dropdown-menu scrollableDropdown">
+            </ul>
+            <br>
+            <input id="selectedSlotTypes" type="text" class="form-control" placeholder="Selected Slot Type" readonly>
+        </div>
+        <br>
+        <button type="button" class="btn btn-primary" onclick="addResource()">Add to Table</button>
+
+        <table class="table table-striped" id="resourcesTable">
+            <thead>
+                <tr>
+                    <th>Resource</th>
+                    <th>Amount of Resource</th>
+                    <th>Ingredient Template</th>
+                    <th>Ingredient Type</th>
+                    <th>Ingredient Slot Type</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be added here dynamically -->
+            </tbody>
+        </table>
+        
+        <br>
+
+        <div class="form-group">
+            <label for="createdObjectInput">Crafted Object:</label>
+            <input type="text" class="form-control" id="createdObjectInput" placeholder="Crafted Object">
+            <div class="col">
+                <div id="autocomplete-object-list" class="autocomplete-items"></div>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addObject()">Add to Additional Templates Table</button>
+        </div>
+        
+        <br>
+
+        <table class="table table-striped" id="additionalObjectsTable">
+            <thead>
+                <tr>
+                    <th>Additional Objects</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows will be added here dynamically -->
+            </tbody>
+        </table>
+
+        <!-- Output area for generated schematic -->
+        <textarea class="container schematic" id="generatedSchematic" readonly></textarea>
+        
+        <br>
+        
+        <button type="button" class="btn btn-success" onclick="generateSchematic()">Generate Schematic</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="variables.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
